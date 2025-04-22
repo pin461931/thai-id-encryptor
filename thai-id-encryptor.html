@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Thai ID AES256 Encrypt/Decrypt</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+<body>
+  <h2>Thai ID AES256 Encrypt/Decrypt</h2>
+
+  <input id="text" placeholder="Enter Thai ID or Encrypted Text" style="width: 300px;"><br><br>
+  <input id="key" placeholder="Enter AES Key" value="CM1B8LykPFQfYzdFfaIwRKnXkLaBXs" style="width: 300px;"><br><br>
+
+  <button onclick="encrypt()">Encrypt</button>
+  <button onclick="decrypt()">Decrypt</button>
+
+  <h3>Result:</h3>
+  <pre id="result"></pre>
+
+  <script>
+    function encrypt() {
+      const text = document.getElementById("text").value;
+      const key = document.getElementById("key").value;
+      const encrypted = CryptoJS.AES.encrypt(text, key).toString();
+      document.getElementById("result").textContent = "Encrypted: " + encrypted;
+    }
+
+    function decrypt() {
+      const encryptedText = document.getElementById("text").value;
+      const key = document.getElementById("key").value;
+      const decrypted = CryptoJS.AES.decrypt(encryptedText, key);
+      const result = decrypted.toString(CryptoJS.enc.Utf8);
+      document.getElementById("result").textContent = "Decrypted: " + result;
+    }
+  </script>
+</body>
+</html>
